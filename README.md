@@ -1,4 +1,0 @@
-binomial
-========
-
-Binomial Distribution Function
