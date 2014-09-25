@@ -7,10 +7,13 @@
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/jquery-ui.css" rel="stylesheet">
+<link href="css/sliders.css" rel="stylesheet">
+<link href="css/d3.css" rel="stylesheet">
 
 <script src="./js/jquery.min.js"></script>
 <script src="./js/jquery-ui.js"></script>
 <script src="./js/d3.v3.min.js"></script>
+<script src="./js/binomial.js"></script>
 
 </head>
 
