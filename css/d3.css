@@ -1,0 +1,41 @@
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+svg{
+	background-color: #fff;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+
+div.white{background-color: #fff;}
+div.tooltip {
+  position: absolute;
+  color:#fff;
+  width:300px;
+  padding: 8px;
+  font: 12px sans-serif;
+  background: #333;
+  border: solid 1px #aaa;
+  border-radius: 4px;
+  pointer-events: none;
+}
