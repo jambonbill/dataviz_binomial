@@ -8,14 +8,15 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
 
 console.log('width='+width,'height='+height);
 
-var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+//var x = d3.scale.ordinal().rangeBands([0, width]);
+var x = d3.scale.linear().range([0, width]);
 var y1 = d3.scale.linear().range([200, 0]);
 var y2 = d3.scale.linear().range([400, 240]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom")
-    .ticks(5);
+    .orient("bottom");
+    //.ticks(5);
 
 
 var yAxis = d3.svg.axis()
@@ -52,13 +53,13 @@ function refresh(){
 
 function update() {
 
-    console.log('update()',data.map(function(d,i) { return i; }));
+    //console.log('update()',data.map(function(d,i) { return i; }));
 
-    x.domain(data.map(function(d,i) { return i; }));
-    //x.domain(data.map(data.length));
+    //x.domain(data.map(function(d,i) { return i; }));
+    x.domain([0,data.length]);
     
-    //y.domain([0, d3.max(data, function(d) { return d.n1; })]);
-    y1.domain([0, 0.25]);
+    y1.domain([0, d3.max(data, function(d) { return d.p1; })]);
+    //y1.domain([0, 0.25]);
     y2.domain([0, 1.2]);
 
 
@@ -99,13 +100,15 @@ function update() {
         .attr("fill", color1 )
         .attr("x", function(d,i) { return x(i); })
         .attr("y", function(d) { return 200; })
-        .attr("width", x.rangeBand()/2)
+        //.attr("width", x.rangeBand()/2)
+        .attr("width", 2)
         .attr("height", 1 )
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseout", mouseout);
 
     b1.transition(500)
+        .attr("x", function(d,i) { return x(i); })
         .attr("y", function(d) { return y1(d.p1); })
         .attr("height", function(d){ return 200 - y1(d.p1); } );
   
@@ -116,15 +119,17 @@ function update() {
     b2.enter().append("rect")
         .attr("class", "bar2")
         .attr("fill", color2 )
-        .attr("x", function(d,i) { return x(i)+x.rangeBand()/2; })
+        .attr("x", function(d,i) { return x(i); })
         .attr("y", function(d) { return 200; })
-        .attr("width", x.rangeBand()/2)
+        //.attr("width", x.rangeBand()/2)
+        .attr("width", 2)
         .attr("height", 1 )
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseout", mouseout);
     
     b2.transition(500)
+        .attr("x", function(d,i) { return x(i); })
         .attr("y", function(d) { return y1(d.p2); })
         .attr("height", function(d){ return 200 - y1(d.p2); } );
     
@@ -137,7 +142,7 @@ function update() {
     c1.enter().append("circle")
         .attr("class", "c1")
         .attr("fill", color1 )
-        .attr("cx", function(d,i) { return x(i)+x.rangeBand()/2; })
+        .attr("cx", function(d,i) { return x(i); })
         .attr("cy", function(d) { return 400; })
         .attr("r", 0)
         .on("mouseover", mouseover)
@@ -145,6 +150,7 @@ function update() {
         .on("mouseout", mouseout);
 
     c1.transition(500)
+        .attr("cx", function(d,i) { return x(i); })
         .attr("cy", function(d) { return y2(d.c1); })
         .attr("r", function(d){ return 4 } );
   
@@ -155,7 +161,7 @@ function update() {
     c2.enter().append("circle")
         .attr("class", "c2")
         .attr("fill", color2 )
-        .attr("cx", function(d,i) { return x(i)+x.rangeBand()/2; })
+        .attr("cx", function(d,i) { return x(i); })
         .attr("cy", function(d) { return 400; })
         .attr("r", 0)
         .on("mouseover", mouseover)
@@ -163,6 +169,7 @@ function update() {
         .on("mouseout", mouseout);
     
     c2.transition(500)
+        .attr("cx", function(d,i) { return x(i); })
         .attr("cy", function(d) { return y2(d.c2); })
         .attr("r", function(d){ return 4; } );
   
@@ -221,7 +228,7 @@ function mouseout(){
 // data part
 var data=[];
 function getData(){
-    console.log('getData()');
+    //console.log('getData()');
     
     var p1=$("#p1").slider("value")*1;
     var p2=$("#p2").slider("value")*1;
@@ -238,10 +245,10 @@ function getData(){
     {
         var prb1 = BinomTerm( p1, n1, k );// proba
         var cum1 = BinomialP( p1, n1, k );// cumul
-        var prb2 = BinomTerm( p2, n2, k );// proba
-        var cum2 = BinomialP( p2, n2, k );// cumul
+        //var prb2 = BinomTerm( p2, n2, k );// proba
+        //var cum2 = BinomialP( p2, n2, k );// cumul
         
-        data.push({'p1':prb1,'p2':prb2,'c1':cum1,'c2':cum2});//'letter':k,
+        data.push({'p1':prb1,'p2':0,'c1':cum1,'c2':0});//'letter':k,
     }
     return data;
 }

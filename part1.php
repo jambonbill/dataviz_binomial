@@ -56,10 +56,11 @@ $(function() {
 		orientation: "horizontal",
 		range: "min",
 		animate: true,
+		slide:function(){updateLabels()},
 		change:function(x){
 		  	//var value = $( "#p1" ).slider( "option", "value" );
 		  	//console.log($("#p1").slider("value"));
-			//updateLabels();
+			updateLabels();
 			refresh();//compute and redraw graph
 		}
 	});
@@ -73,11 +74,12 @@ $(function() {
 		orientation: "horizontal",
 		range: "min",
 		animate: true,
+		slide:function(){updateLabels()},
 		change:function(x){
 			//var value = $( "#n1" ).slider( "option", "value" );
 			//console.log(value);
 			//console.log($(this).val());
-		 	//updateLabels();
+		 	updateLabels();
 		 	refresh();//compute and redraw graph
 		}
 	});
@@ -90,9 +92,16 @@ function updateLabels(){
 	$('#labelp1').html('P : '+$("#p1").slider("value"));
 	$('#labelp2').html('P : '+$("#p2").slider("value"));
 	$('#labeln1').html('N : '+$("#n1").slider("value"));
-	$('#labeln2').html('N : '+$("#n2").slider("value"));
-	
+	$('#labeln2').html('N : '+$("#n2").slider("value"));	
 }
+
+function debug(){
+	console.clear();
+	for(var i=0;i<data.length;i++){
+		console.log(i, Math.round(data[i].p1*100)/100);
+	}
+}
+
 
 </script>
 
