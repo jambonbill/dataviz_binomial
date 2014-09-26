@@ -3,30 +3,32 @@
 
 <div class="row">
 	
-	<div class="col-md-6" id='sliders'>
+	<div class="col-md-4" id='sliders'>
 
 		<!-- Curve 1 -->
-		<h3>Curve 1</h3>
+		<h3><i class="fa fa-area-chart" style='color:#c00'></i> Curve 1</h3>
 
 		<div id="sliderDiv" class="ui-widget ui-corner-all">
-		<label id='labelp1'>P</label> 
+		<i class="fa fa-arrows-h" style='color:#c00'></i>
+		<label id='labelp1'>p</label> 
 		<div id="p1"></div>
 
 		<br />
-		<label id='labeln1'>N</label> 
+		<i class="fa fa-arrows-h" style='color:#c00'></i>
+		<label id='labeln1'>n</label> 
 		<div id="n1"></div>
 		</div>
 
 
 		<!-- Curve 2 -->
-		<h3>Curve 2</h3>
+		<h3><i class="fa fa-area-chart"></i> Curve 2</h3>
 
 		<div id="sliderDiv" class="ui-widget ui-corner-all">
-		<label id='labelp2'>P</label>
+		<label id='labelp2'>p</label>
 		<div id="p2"></div>
 
 		<br />
-		<label id='labeln2'>N</label>
+		<label id='labeln2'>n</label>
 		<div id="n2"></div>
 		</div>
 
@@ -35,7 +37,6 @@
 	
 	<div class="col-md-6" id='graph1'>
 		<!-- D3 Graph -->
-		<h3>D3 Graph</h3>
 		<div id='graph2'></div>
 	</div>
 </div>
@@ -89,10 +90,10 @@ $(function() {
 });
 
 function updateLabels(){
-	$('#labelp1').html('P : '+$("#p1").slider("value"));
-	$('#labelp2').html('P : '+$("#p2").slider("value"));
-	$('#labeln1').html('N : '+$("#n1").slider("value"));
-	$('#labeln2').html('N : '+$("#n2").slider("value"));	
+	$('#labelp1').html('p : '+$("#p1").slider("value"));
+	$('#labelp2').html('p : '+$("#p2").slider("value"));
+	$('#labeln1').html('n : '+$("#n1").slider("value"));
+	$('#labeln2').html('n : '+$("#n2").slider("value"));	
 }
 
 function debug(){
@@ -102,7 +103,12 @@ function debug(){
 	}
 }
 
-
+$(function(){
+	updateLabels();
+	$("#p1").slider({value: 0.3});
+    $("#p2").slider({value: 0.7});
+  	console.log("part1.php");
+});
 </script>
 
 <script src='d3graph.js'></script>

@@ -6,7 +6,6 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 400 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-console.log('width='+width,'height='+height);
 
 //var x = d3.scale.ordinal().rangeBands([0, width]);
 var x = d3.scale.linear().range([0, width]);
@@ -37,10 +36,7 @@ var svg = d3.select("#graph1").append("svg")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-color(3);
-color(4);
-color(5);
-color(6);
+
 var color1='#c00';
 var color2='#Ccc';
 
@@ -58,7 +54,10 @@ function update() {
     //x.domain(data.map(function(d,i) { return i; }));
     x.domain([0,data.length]);
     
-    y1.domain([0, d3.max(data, function(d) { return d.p1; })]);
+    
+    var y1max=Math.max(d3.max(data, function(d) { return d.p1; }),d3.max(data, function(d) { return d.p2; }))
+    y1.domain([0, y1max]);
+    
     //y1.domain([0, 0.25]);
     y2.domain([0, 1.2]);
 
@@ -100,8 +99,7 @@ function update() {
         .attr("fill", color1 )
         .attr("x", function(d,i) { return x(i); })
         .attr("y", function(d) { return 200; })
-        //.attr("width", x.rangeBand()/2)
-        .attr("width", 2)
+        .attr("width", 1)
         .attr("height", 1 )
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
@@ -110,6 +108,7 @@ function update() {
     b1.transition(500)
         .attr("x", function(d,i) { return x(i); })
         .attr("y", function(d) { return y1(d.p1); })
+        .attr("width", function(d,i){return width/2/data.length;})
         .attr("height", function(d){ return 200 - y1(d.p1); } );
   
     b1.exit().remove(); 
@@ -121,8 +120,7 @@ function update() {
         .attr("fill", color2 )
         .attr("x", function(d,i) { return x(i); })
         .attr("y", function(d) { return 200; })
-        //.attr("width", x.rangeBand()/2)
-        .attr("width", 2)
+        .attr("width", 1)
         .attr("height", 1 )
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
@@ -131,6 +129,7 @@ function update() {
     b2.transition(500)
         .attr("x", function(d,i) { return x(i); })
         .attr("y", function(d) { return y1(d.p2); })
+        .attr("width", function(d,i){return width/2/data.length;})
         .attr("height", function(d){ return 200 - y1(d.p2); } );
     
     b2.exit().remove(); 
@@ -245,10 +244,10 @@ function getData(){
     {
         var prb1 = BinomTerm( p1, n1, k );// proba
         var cum1 = BinomialP( p1, n1, k );// cumul
-        //var prb2 = BinomTerm( p2, n2, k );// proba
-        //var cum2 = BinomialP( p2, n2, k );// cumul
+        var prb2 = BinomTerm( p2, n2, k );// proba
+        var cum2 = BinomialP( p2, n2, k );// cumul
         
-        data.push({'p1':prb1,'p2':0,'c1':cum1,'c2':0});//'letter':k,
+        data.push({'p1':prb1,'p2':prb2,'c1':cum1,'c2':cum2});//'letter':k,
     }
     return data;
 }
@@ -263,5 +262,7 @@ $(function(){
     });
     */
     console.log("d3graph.js");
-    refresh();
+    
+    //refresh();
 });
+
