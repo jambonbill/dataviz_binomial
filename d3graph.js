@@ -38,7 +38,7 @@ var svg = d3.select("#graph1").append("svg")
 
 
 var color1='#c00';
-var color2='#Ccc';
+var color2='#999';
 
 
 
@@ -47,11 +47,11 @@ function refresh(){
     update();
 }
 
+
 function update() {
 
-    //console.log('update()',data.map(function(d,i) { return i; }));
-
-    //x.domain(data.map(function(d,i) { return i; }));
+    //console.log('update()');
+    // x.domain(data.map(function(d,i) { return i; }));
     x.domain([0,data.length]);
     
     
@@ -91,73 +91,151 @@ function update() {
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis2)
+    .append("text")
+        .attr("x", -240)
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Cumulative value")
 
 
     var b1= svg.selectAll(".bar1").data(data);
-    b1.enter().append("rect")
-        .attr("class", "bar1")
-        .attr("fill", color1 )
-        .attr("x", function(d,i) { return x(i); })
-        .attr("y", function(d) { return 200; })
-        .attr("width", 1)
-        .attr("height", 1 )
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseout", mouseout);
 
-    b1.transition(500)
-        .attr("x", function(d,i) { return x(i); })
-        .attr("y", function(d) { return y1(d.p1); })
-        .attr("width", function(d,i){return width/2/data.length;})
-        .attr("height", function(d){ return 200 - y1(d.p1); } );
-  
+    
+    if ($("input[name='rad']:checked").val()=="bubble") {
+        //bubble
+        b1.enter().append("circle")
+            .attr("class", "bar1")
+            .attr("fill", color1 )
+            .attr("cx", function(d,i) { return x(i); })
+            .attr("cy", function(d) { return 200; })
+            .attr("r", 1)
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseout", mouseout);
+
+        b1.transition(500)
+            .attr("cx", function(d,i) { return x(i); })
+            .attr("cy", function(d) { return y1(d.p1); })
+            .attr("r", function(d,i){return Math.max(2,width/4/data.length);});
+
+    } else {
+        //rect
+        b1.enter().append("rect")
+            .attr("class", "bar1")
+            .attr("fill", color1 )
+            .attr("x", function(d,i) { return x(i); })
+            .attr("y", function(d) { return 200; })
+            .attr("width", 1)
+            .attr("height", 1 )
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseout", mouseout);
+
+        b1.transition(500)
+            .attr("x", function(d,i) { return x(i); })
+            .attr("y", function(d) { return y1(d.p1); })
+            .attr("width", function(d,i){return width/2/data.length;})
+            .attr("height", function(d){ return 200 - y1(d.p1); } );
+    }
+    
     b1.exit().remove(); 
     
-    
+
     var b2= svg.selectAll(".bar2").data(data);
-    b2.enter().append("rect")
-        .attr("class", "bar2")
-        .attr("fill", color2 )
-        .attr("x", function(d,i) { return x(i); })
-        .attr("y", function(d) { return 200; })
-        .attr("width", 1)
-        .attr("height", 1 )
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseout", mouseout);
+
+    if ($("input[name='rad2']:checked").val()=="bubble") {
     
-    b2.transition(500)
-        .attr("x", function(d,i) { return x(i); })
-        .attr("y", function(d) { return y1(d.p2); })
-        .attr("width", function(d,i){return width/2/data.length;})
-        .attr("height", function(d){ return 200 - y1(d.p2); } );
-    
+        b2.enter().append("circle")
+            .attr("class", "bar2")
+            .attr("fill", color2 )
+            //.attr("opacity", 0.5) 
+            .attr("cx", function(d,i) { return x(i); })
+            .attr("cy", function(d) { return 200; })
+            .attr("r", 1)
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseout", mouseout);
+        
+        b2.transition(500)
+            .attr("cx", function(d,i) { return x(i); })
+            .attr("cy", function(d) { return y1(d.p2); })
+            .attr("r", function(d,i){return Math.max(2,width/4/data.length);});
+
+    } else {
+        
+        b2.enter().append("rect")
+            .attr("class", "bar2")
+            .attr("fill", color2 )
+            .attr("opacity", 0.5) 
+            .attr("x", function(d,i) { return x(i); })
+            .attr("y", function(d) { return 200; })
+            .attr("width", 1)
+            .attr("height", 1 )
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseout", mouseout);
+        
+        b2.transition(500)
+            .attr("x", function(d,i) { return x(i); })
+            .attr("y", function(d) { return y1(d.p2); })
+            .attr("width", function(d,i){return width/2/data.length;})
+            .attr("height", function(d){ return 200 - y1(d.p2); } );
+    }
+
     b2.exit().remove(); 
 
     
-    // cumul
+
+
+    // cumulated values
     // cumul 1
     var c1= svg.selectAll(".c1").data(data);
-    c1.enter().append("circle")
-        .attr("class", "c1")
-        .attr("fill", color1 )
-        .attr("cx", function(d,i) { return x(i); })
-        .attr("cy", function(d) { return 400; })
-        .attr("r", 0)
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseout", mouseout);
 
-    c1.transition(500)
-        .attr("cx", function(d,i) { return x(i); })
-        .attr("cy", function(d) { return y2(d.c1); })
-        .attr("r", function(d){ return 4 } );
-  
+    if ($("input[name='rad']:checked").val()=="bubble") {
+    
+        c1.enter().append("circle")
+            .attr("class", "c1")
+            .attr("fill", color1 )
+            .attr("cx", function(d,i) { return x(i); })
+            .attr("cy", function(d) { return 400; })
+            .attr("r", 0)
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseout", mouseout);
+
+        c1.transition(500)
+            .attr("cx", function(d,i) { return x(i); })
+            .attr("cy", function(d) { return y2(d.c1); })
+            .attr("r", function(d){ return Math.max(2,width/4/data.length) } );
+    } else {
+        c1.enter().append("rect")
+            .attr("class", "c1")
+            .attr("fill", color1 )
+            .attr("x", function(d,i) { return x(i); })
+            .attr("y", function(d) { return 400; })
+            .attr("width", 0)
+            .attr("height", 0)
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseout", mouseout);
+
+        c1.transition(500)
+            .attr("x", function(d,i) { return x(i); })
+            .attr("y", function(d) { return y2(d.c1); })
+            .attr("width", function(){ return width/2/data.length;} )
+            .attr("height", function(d){ return 400 - y2(d.c1); } );
+    }  
+
     c1.exit().remove();
 
     // cumul 2
     var c2= svg.selectAll(".c2").data(data);
-    c2.enter().append("circle")
+    
+    if($("input[name='rad2']:checked").val()=="bubble"){// bars
+
+        c2.enter().append("circle")
         .attr("class", "c2")
         .attr("fill", color2 )
         .attr("cx", function(d,i) { return x(i); })
@@ -167,11 +245,33 @@ function update() {
         .on("mousemove", mousemove)
         .on("mouseout", mouseout);
     
-    c2.transition(500)
+        c2.transition(500)
         .attr("cx", function(d,i) { return x(i); })
         .attr("cy", function(d) { return y2(d.c2); })
-        .attr("r", function(d){ return 4; } );
-  
+        .attr("r", function(d){ return Math.max(2,width/4/data.length); } );
+
+    } else {// circles
+        
+        c2.enter().append("rect")
+        .attr("class", "c2")
+        .attr("fill", color2 )
+        .attr("opacity", 0.5 )
+        .attr("x", function(d,i) { return x(i); })
+        .attr("y", function(d) { return 400; })
+        .attr("width", 0)
+        .attr("height", 0)
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseout", mouseout);
+    
+        c2.transition(500)
+        .attr("x", function(d,i) { return x(i)-width/4/data.length; })
+        .attr("y", function(d) { return y2(d.c2); })
+        .attr("width", function(d){ return width/2/data.length; } )
+        .attr("height", function(d){ return 400-y2(d.c2); } );
+
+    }
+
     c2.exit().remove(); 
 
 }

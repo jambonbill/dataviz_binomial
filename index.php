@@ -28,8 +28,12 @@
 <hr />
 
 <?php
+//include "800px.php";
+
 include "part1.php";
 
-include "part2.php";
+//include "part2.php";
+
+//include "part3.php";
 
 //include "footer.php";
