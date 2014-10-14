@@ -27,6 +27,6 @@ Cookies, local storage, and other client-side data storage.
 <li>http://127.0.0.1/d3/barchart/index2.php
 <li>http://www.math.uah.edu/stat/applets/DiceExperiment.html
 
-
+<li>http://www.math.uah.edu/stat/applets/BinomialCoinExperiment.html
 </body>
 </html>

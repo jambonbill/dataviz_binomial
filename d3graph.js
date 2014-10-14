@@ -112,7 +112,7 @@ function update() {
             .attr("cy", function(d) { return 200; })
             .attr("r", 1)
             .on("mouseover", mouseover)
-            .on("mousemove", mousemove)
+            .on("mousemove", mm1)
             .on("mouseout", mouseout);
 
         b1.transition(500)
@@ -130,7 +130,7 @@ function update() {
             .attr("width", 1)
             .attr("height", 1 )
             .on("mouseover", mouseover)
-            .on("mousemove", mousemove)
+            .on("mousemove", mm1)
             .on("mouseout", mouseout);
 
         b1.transition(500)
@@ -155,7 +155,7 @@ function update() {
             .attr("cy", function(d) { return 200; })
             .attr("r", 1)
             .on("mouseover", mouseover)
-            .on("mousemove", mousemove)
+            .on("mousemove", mm2)
             .on("mouseout", mouseout);
         
         b2.transition(500)
@@ -174,11 +174,11 @@ function update() {
             .attr("width", 1)
             .attr("height", 1 )
             .on("mouseover", mouseover)
-            .on("mousemove", mousemove)
+            .on("mousemove", mm2)
             .on("mouseout", mouseout);
         
         b2.transition(500)
-            .attr("x", function(d,i) { return x(i); })
+            .attr("x", function(d,i) { return x(i)-width/4/data.length; })
             .attr("y", function(d) { return y1(d.p2); })
             .attr("width", function(d,i){return width/2/data.length;})
             .attr("height", function(d){ return 200 - y1(d.p2); } );
@@ -202,7 +202,7 @@ function update() {
             .attr("cy", function(d) { return 400; })
             .attr("r", 0)
             .on("mouseover", mouseover)
-            .on("mousemove", mousemove)
+            .on("mousemove", mm1)
             .on("mouseout", mouseout);
 
         c1.transition(500)
@@ -218,7 +218,7 @@ function update() {
             .attr("width", 0)
             .attr("height", 0)
             .on("mouseover", mouseover)
-            .on("mousemove", mousemove)
+            .on("mousemove", mm1)
             .on("mouseout", mouseout);
 
         c1.transition(500)
@@ -242,7 +242,7 @@ function update() {
         .attr("cy", function(d) { return 400; })
         .attr("r", 0)
         .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
+        .on("mousemove", mm2)
         .on("mouseout", mouseout);
     
         c2.transition(500)
@@ -250,7 +250,7 @@ function update() {
         .attr("cy", function(d) { return y2(d.c2); })
         .attr("r", function(d){ return Math.max(2,width/4/data.length); } );
 
-    } else {// circles
+    } else {// rect
         
         c2.enter().append("rect")
         .attr("class", "c2")
@@ -261,7 +261,7 @@ function update() {
         .attr("width", 0)
         .attr("height", 0)
         .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
+        .on("mousemove", mm2)
         .on("mouseout", mouseout);
     
         c2.transition(500)
@@ -298,19 +298,34 @@ function mouseover(){
 }
 
 var dod;
-function mousemove(d,i){
+function mm1(d,i){
     dod=d;
     var html = "";
     html+="<b>n["+i+"]</b><br />\n";
     html+="<hr style='margin-top:4px;margin-bottom:4px' i/>";
     html+="c1="+Math.round(d.c1*100)/100+"<br />";
     html+="p1="+Math.round(d.p1*100)/100+"<br />";
+    //html+="c2="+Math.round(d.c2*100)/100+"<br />";
+    //html+="p2="+Math.round(d.p2*100)/100+"<br />";
+    ttdiv.html( html )
+  .style("left", ttleft )
+  .style("top", (d3.event.pageY + 10 ) + "px");
+}
+
+function mm2(d,i){
+    dod=d;
+    var html = "";
+    html+="<b>n["+i+"]</b><br />\n";
+    html+="<hr style='margin-top:4px;margin-bottom:4px' i/>";
+    //html+="c1="+Math.round(d.c1*100)/100+"<br />";
+    //html+="p1="+Math.round(d.p1*100)/100+"<br />";
     html+="c2="+Math.round(d.c2*100)/100+"<br />";
     html+="p2="+Math.round(d.p2*100)/100+"<br />";
     ttdiv.html( html )
   .style("left", ttleft )
   .style("top", (d3.event.pageY + 10 ) + "px");
 }
+
 
 function ttleft(){
   var max = $("body").width()-$("div.tooltip").width() - 20;
@@ -352,17 +367,10 @@ function getData(){
     return data;
 }
 
-getData();
 
 
 $(function(){
-    /*
-    $("#n1,#p1,#n2,#p2").change(function(){
-        refresh();
-    });
-    */
-    console.log("d3graph.js");
-    
-    //refresh();
+    //console.log("d3graph.js");
+    getData();
 });
 

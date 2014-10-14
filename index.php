@@ -32,7 +32,7 @@
 
 include "part1.php";
 
-//include "part2.php";
+include "part2.php";
 
 //include "part3.php";
 
