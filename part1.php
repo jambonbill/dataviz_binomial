@@ -1,5 +1,5 @@
 
-<h2>Part 1 - The rules</h2>
+<h2>Part 1 - Compare two binomials</h2>
 
 <div class="row">
 	
@@ -7,7 +7,7 @@
 
 		<!-- Curve 1 params -->
 		<h3>
-		C1 
+		Binomial 1 
 		<small id="rad1" class='pull-right'>
 		<input type="radio" id="radio1" name="rad" value='bar'><label for="radio1"><i class="fa fa-bar-chart" style='color:#c00'></i></label>
 		<input type="radio" id="radio2" name="rad" value='bubble' checked="checked"><label for="radio2"><i class="fa fa-circle" style='color:#c00'></i></label>
@@ -30,7 +30,7 @@
 
 		<!-- Curve 2 params -->
 		<h3>
-		C2
+		Binomial 2
 		<small id='rad2' class='pull-right'>
 		<input type="radio" id="radio3" name="rad2" value='bar' checked="checked"><label for="radio3"><i class="fa fa-bar-chart" style='color:#333'></i></label>
 		<input type="radio" id="radio4" name="rad2" value='bubble'><label for="radio4"><i class="fa fa-circle" style='color:#333'></i></label>

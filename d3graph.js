@@ -8,7 +8,7 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
 
 
 //var x = d3.scale.ordinal().rangeBands([0, width]);
-var x = d3.scale.linear().range([0, width]);
+var x = d3.scale.linear().range([10, width]);
 var y1 = d3.scale.linear().range([200, 0]);
 var y2 = d3.scale.linear().range([400, 240]);
 
@@ -155,7 +155,7 @@ function update() {
             .attr("cy", function(d) { return 200; })
             .attr("r", 1)
             .on("mouseover", mouseover)
-            .on("mousemove", mm2)
+            .on("mousemove", mm1)
             .on("mouseout", mouseout);
         
         b2.transition(500)
@@ -174,7 +174,7 @@ function update() {
             .attr("width", 1)
             .attr("height", 1 )
             .on("mouseover", mouseover)
-            .on("mousemove", mm2)
+            .on("mousemove", mm1)
             .on("mouseout", mouseout);
         
         b2.transition(500)
@@ -202,7 +202,7 @@ function update() {
             .attr("cy", function(d) { return 400; })
             .attr("r", 0)
             .on("mouseover", mouseover)
-            .on("mousemove", mm1)
+            .on("mousemove", mm2)
             .on("mouseout", mouseout);
 
         c1.transition(500)
@@ -218,7 +218,7 @@ function update() {
             .attr("width", 0)
             .attr("height", 0)
             .on("mouseover", mouseover)
-            .on("mousemove", mm1)
+            .on("mousemove", mm2)
             .on("mouseout", mouseout);
 
         c1.transition(500)
@@ -301,26 +301,27 @@ var dod;
 function mm1(d,i){
     dod=d;
     var html = "";
-    html+="<b>n["+i+"]</b><br />\n";
+    html+="<b>"+i+" success</b> (n)<br />\n";
     html+="<hr style='margin-top:4px;margin-bottom:4px' i/>";
-    html+="c1="+Math.round(d.c1*100)/100+"<br />";
-    html+="p1="+Math.round(d.p1*100)/100+"<br />";
-    //html+="c2="+Math.round(d.c2*100)/100+"<br />";
+    html+="Value 1="+Math.round(d.c1*100)/100+"<br />";
+    //html+="p1="+Math.round(d.p1*100)/100+"<br />";
+    html+="Value 2="+Math.round(d.c2*100)/100+"<br />";
     //html+="p2="+Math.round(d.p2*100)/100+"<br />";
     ttdiv.html( html )
   .style("left", ttleft )
   .style("top", (d3.event.pageY + 10 ) + "px");
 }
 
+
 function mm2(d,i){
     dod=d;
     var html = "";
-    html+="<b>n["+i+"]</b><br />\n";
+    html+="<b>"+i+" success</b> (n)<br />\n";
     html+="<hr style='margin-top:4px;margin-bottom:4px' i/>";
-    //html+="c1="+Math.round(d.c1*100)/100+"<br />";
+    html+="Cummulated value 1="+Math.round(d.c1*100)/100+"<br />";
     //html+="p1="+Math.round(d.p1*100)/100+"<br />";
-    html+="c2="+Math.round(d.c2*100)/100+"<br />";
-    html+="p2="+Math.round(d.p2*100)/100+"<br />";
+    html+="Cummulated value 2="+Math.round(d.c2*100)/100+"<br />";
+    //html+="p2="+Math.round(d.p2*100)/100+"<br />";
     ttdiv.html( html )
   .style("left", ttleft )
   .style("top", (d3.event.pageY + 10 ) + "px");
@@ -331,6 +332,7 @@ function ttleft(){
   var max = $("body").width()-$("div.tooltip").width() - 20;
     return  Math.min( max , d3.event.pageX + 10 ) + "px";
 }
+
 
 function mouseout(){
     ttdiv.transition().duration(200).style("opacity", 1e-6);
@@ -354,7 +356,7 @@ function getData(){
     //var p2=0.7;
     //var n2=20;
     
-    data=[];    
+    data=[];
     for(var k=0;k<Math.max(n1,n2);k++)
     {
         var prb1 = BinomTerm( p1, n1, k );// proba

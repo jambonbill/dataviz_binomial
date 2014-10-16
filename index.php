@@ -17,6 +17,7 @@
 <script src="./js/jquery-ui.js"></script>
 <script src="./js/d3.v3.min.js"></script>
 <script src="./js/binomial.js"></script>
+<script src="./js/game.js"></script>
 
 </head>
 
@@ -32,7 +33,8 @@
 
 include "part1.php";
 
-include "part2.php";
+include "part2a.php";// what is a game
+include "part2b.php";// play the game
 
 //include "part3.php";
 

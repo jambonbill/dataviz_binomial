@@ -23,12 +23,14 @@ var datag=[];
 
 function updateGame() {
 
-    console.log('updateGame()',jstat.length);
+    //console.log('updateGame()',jstat.length);
     
     xg.domain([0,jstat.length]);
     
     //var ygmax=Math.max(d3.max(datag, function(d) { return d.p1; }),d3.max(datag, function(d) { return d.p2; }))
-    var ygmax=0.25;
+    var ygmax=d3.max(jstat, function(d) { return d.n; });
+    //console.log('ygmax',ygmax);
+    //var ygmax=0.25;
     yg.domain([0, ygmax]);
     
     
@@ -71,7 +73,7 @@ function updateGame() {
         b1.transition(500)
             .attr("cx", function(d,i) { return xg(i); })
             .attr("cy", function(d) { return yg(d.n); })
-            .attr("r", function(d,i){return Math.max(2,width/4/data.length);});
+            .attr("r", function(d,i){return Math.max(2,width/4/jstat.length);});
 
     } else {
         //rect
@@ -86,7 +88,7 @@ function updateGame() {
         b1.transition(500)
             .attr("x", function(d,i) { return xg(i); })
             .attr("y", function(d) { return yg(d.n); })
-            .attr("width", function(d,i){return width/2/data.length;})
+            .attr("width", function(d,i){return width/2/jstat.length;})
             .attr("height", function(d){ return 200 - yg(d.n); } );
     }
     
