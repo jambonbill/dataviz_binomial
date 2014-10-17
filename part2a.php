@@ -12,7 +12,6 @@
 		</div>
 	</div>
 
-
 	<div class="col-sm-6">
 		<div class="ui-widget ui-corner-all" id='sliderDiv'>
 		
@@ -138,5 +137,34 @@ $('#rules').change(function(o){
 	$('#testresult').html('');
 	if(!o.target.value)$('#rule_details').html('');
 	$('#btnThrown').html("<i class='fa fa-play'></i> "+$("#rules option:selected").text());
+
+	// change the Binomial 2 preset
+	var id=$('#rules').prop("selectedIndex")*1;
+	switch(id){
+		case 0://odd numbers
+			$("#p2").slider({value: 3/6});
+			break;
+
+		case 1://1 and 2
+			$("#p2").slider({value: 2/6});
+			break;
+		
+		case 2://6
+			$("#p2").slider({value: 1/6});
+			break;
+		
+		case 3:// > 1
+			$("#p2").slider({value: 5/6});
+			break;
+		
+		case 4:// > 2
+			$("#p2").slider({value: 4/6});
+			break;
+
+		case 5:// > 3
+			$("#p2").slider({value: 3/6});
+			break;
+	}
+	
 });
 </script>

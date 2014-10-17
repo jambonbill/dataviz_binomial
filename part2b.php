@@ -17,7 +17,7 @@
 				<div class='row'>
 					<!--Rule selection-->
 					<div class="col-xs-6">
-					<label>Number of throws</label>
+					<label>Number of throws (n)</label>
 					<div class='form-group'>
 					<select class='form-control' id='selectN'>
 						<option>10</option>
@@ -33,7 +33,7 @@
 					<div class="col-xs-6">
 					<label>Test k</label>
 					<div class='form-group'>
-						<a href=#test id='btnThrown' onclick=throwNtimes() class='btn btn-default'><i class='fa fa-play'></i> Throw n times</a>
+						<a href=#test id='btnThrown' onclick=throwNtimes() class='btn btn-default' title='Play the game'><i class='fa fa-play'></i> Throw n times</a>
 					</div>
 					</div>
 				</div>
@@ -110,6 +110,7 @@ $('#selectN').change(function(o){
 	nseq=[];
 	clearTimeout(t);
 	$('#ndemo').html('');
+	throwNtimes();
 });
 
 $(function(){

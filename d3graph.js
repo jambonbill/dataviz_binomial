@@ -52,7 +52,7 @@ function update() {
 
     //console.log('update()');
     // x.domain(data.map(function(d,i) { return i; }));
-    x.domain([0,data.length]);
+    x.domain([0,data.length-1]);
     
     
     var y1max=Math.max(d3.max(data, function(d) { return d.p1; }),d3.max(data, function(d) { return d.p2; }))
@@ -303,10 +303,8 @@ function mm1(d,i){
     var html = "";
     html+="<b>"+i+" success</b> (n)<br />\n";
     html+="<hr style='margin-top:4px;margin-bottom:4px' i/>";
-    html+="Value 1="+Math.round(d.c1*100)/100+"<br />";
-    //html+="p1="+Math.round(d.p1*100)/100+"<br />";
-    html+="Value 2="+Math.round(d.c2*100)/100+"<br />";
-    //html+="p2="+Math.round(d.p2*100)/100+"<br />";
+    html+="Value 1="+Math.round(d.p1*100)/100+"<br />";
+    html+="Value 2="+Math.round(d.p2*100)/100+"<br />";
     ttdiv.html( html )
   .style("left", ttleft )
   .style("top", (d3.event.pageY + 10 ) + "px");
@@ -357,7 +355,7 @@ function getData(){
     //var n2=20;
     
     data=[];
-    for(var k=0;k<Math.max(n1,n2);k++)
+    for(var k=0;k<=Math.max(n1,n2);k++)
     {
         var prb1 = BinomTerm( p1, n1, k );// proba
         var cum1 = BinomialP( p1, n1, k );// cumul
