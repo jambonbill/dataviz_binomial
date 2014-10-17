@@ -26,7 +26,7 @@
 					<select class='form-control' id='rules'>
 						<option value='3/6'>Odd number win</option>
 						<option value='2/6'>1 and 2 win</option>
-						<option value='1/6'>6 win</option>
+						<option value='1/6'>Number 6 win</option>
 						<option value='5/6'>Over 1 win</option>
 						<option value='4/6'>Over 2 win</option>
 						<option value='3/6'>Over 3 win</option>

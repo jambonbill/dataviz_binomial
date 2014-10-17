@@ -31,7 +31,7 @@ div.white{background-color: #fff;}
 div.tooltip {
   position: absolute;
   color:#fff;
-  width:300px;
+  width:150px;
   padding: 8px;
   font: 12px sans-serif;
   background: #333;

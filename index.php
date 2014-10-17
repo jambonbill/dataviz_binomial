@@ -36,6 +36,6 @@ include "part1.php";
 include "part2a.php";// what is a game
 include "part2b.php";// play the game
 
-//include "part3.php";
+include "part2c.php";
 
 //include "footer.php";

@@ -11,8 +11,11 @@ Comparisons with other similar distributions (e.g. Gaussian).
 White or light grey background.
 Width of no more than 800 pixels.
 Mobile compatibility is a plus.
-Accuracy in the distribution and the ability to calculate it for a wide range of values should be balanced against speed of calculation. The binomial distribution involves several factorials, and numbers can become very large or very small quickly. Javascript will not store numbers above about 170 factorial.
-D3 and other packages are generally acceptable. Package size may be a concern for some larger packages - with the global audience of the challenge, download speeds are unreliable.
+Accuracy in the distribution and the ability to calculate it for a wide range of values should be balanced against speed of calculation. 
+The binomial distribution involves several factorials, and numbers can become very large or very small quickly. 
+Javascript will not store numbers above about 170 factorial.
+D3 and other packages are generally acceptable. 
+Package size may be a concern for some larger packages - with the global audience of the challenge, download speeds are unreliable.
 
 
 <b>Banned: </b>
