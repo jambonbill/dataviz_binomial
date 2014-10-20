@@ -1,7 +1,7 @@
 
 <div class="row" id='part2b'>
 	
-	<h2>Understanding <i>k</i><a href='#part1' class='pull-right' onclick=$('#part2b').slideUp()><i class='fa fa-times'></i></a></h2>
+	<h2>Understanding <i>n</i> and <i>k</i><a href='#part1' class='pull-right' onclick=$('#part2b').slideUp()><i class='fa fa-times'></i></a></h2>
 	
 	<div class="col-sm-6">
 		<div class="ui-widget ui-corner-all" id='sliderDiv'>

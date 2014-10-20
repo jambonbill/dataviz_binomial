@@ -277,18 +277,10 @@ function update() {
 }
 
 
-/*
-function type(d) {
-  d.frequency = +d.frequency;
-  return d;
-}
-*/
-
 
 /**
  * Tooltip
  */
-
 var ttdiv = d3.select("body").append("div")
 .attr("class", "tooltip")
 .style("opacity", 1e-6);
@@ -301,10 +293,10 @@ var dod;
 function mm1(d,i){
     dod=d;
     var html = "";
-    html+="<b>"+i+" success</b> (n)<br />\n";
+    html+="<b>k = "+i+"</b><br />\n";
     html+="<hr style='margin-top:4px;margin-bottom:4px' i/>";
-    html+="Value 1="+Math.round(d.p1*100)/100+"<br />";
-    html+="Value 2="+Math.round(d.p2*100)/100+"<br />";
+    html+="B1="+Math.round(d.p1*100)/100+"<br />";
+    html+="B2="+Math.round(d.p2*100)/100+"<br />";
     ttdiv.html( html )
   .style("left", ttleft )
   .style("top", (d3.event.pageY + 10 ) + "px");
@@ -314,11 +306,11 @@ function mm1(d,i){
 function mm2(d,i){
     dod=d;
     var html = "";
-    html+="<b>"+i+" success</b> (n)<br />\n";
+    html+="<b>k = "+i+"</b><br />\n";
     html+="<hr style='margin-top:4px;margin-bottom:4px' i/>";
-    html+="Cummulated value 1="+Math.round(d.c1*100)/100+"<br />";
+    html+="B1 Cummul. ="+Math.round(d.c1*100)/100+"<br />";
     //html+="p1="+Math.round(d.p1*100)/100+"<br />";
-    html+="Cummulated value 2="+Math.round(d.c2*100)/100+"<br />";
+    html+="B2 Cummul. ="+Math.round(d.c2*100)/100+"<br />";
     //html+="p2="+Math.round(d.p2*100)/100+"<br />";
     ttdiv.html( html )
   .style("left", ttleft )

@@ -118,7 +118,7 @@ function updateGame() {
 function mmgame(d,i){
     dod=d;
     var html = "";
-    html+="<b>"+i+" success</b> (n)<br />\n";
+    html+="<b>k = "+i+"<br />\n";
     html+="<hr style='margin-top:4px;margin-bottom:4px' i/>";
     html+="Value="+Math.round(d.n*100)/100+"<br />";
     //html+="p1="+Math.round(d.p1*100)/100+"<br />";

@@ -24,7 +24,7 @@
 
 		<br />
 		<i class="fa fa-arrows-h" style='color:#c00'></i>
-		<label id='labeln1'>n</label>  <a href='#part2b' onclick=toggleK() title='Understanding p'><i class="fa fa-question-circle pull-right"></i></a>
+		<label id='labeln1'>n</label>  <a href='#part2b' onclick=toggleK() title='Understanding n and k'><i class="fa fa-question-circle pull-right"></i></a>
 		<div id="n1"></div>
 		</div>
 
@@ -45,7 +45,7 @@
 
 		<br />
 		<i class="fa fa-arrows-h" style='color:#999'></i>
-		<label id='labeln2'>n</label><a href='#part2b' onclick=toggleK() title='Understanding n'><i class="fa fa-question-circle pull-right"></i></a>
+		<label id='labeln2'>n</label><a href='#part2b' onclick=toggleK() title='Understanding n and k'><i class="fa fa-question-circle pull-right"></i></a>
 		<div id="n2"></div>
 		</div>
 
