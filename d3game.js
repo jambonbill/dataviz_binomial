@@ -21,15 +21,19 @@ var color2='#999';
 
 var datag=[];
 
+
 function updateGame() {
 
-    //compute ideal binomial data
+    //console.log('updateGame() jstat.length=', jstat.length);
+    
+    var plu=[3/6,2/6,1/6,5/6,4/6,3/6];
+    var id=$('#gamerules').prop("selectedIndex")*1;
+    // compute ideal binomial data
     for(var i=0;i<jstat.length;i++){
-       var prb1 = BinomTerm( 0.5, jstat.length-1, i );// proba
+       var prb1 = BinomTerm( plu[id], jstat.length-1, i );// proba
        jstat[i].b=prb1; 
     }
     
-
 
     xg.domain([0,jstat.length-1]);
     

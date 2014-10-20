@@ -4,8 +4,8 @@
 <div class="col-sm-6">
 	
 	<div class="ui-widget ui-corner-all" id='sliderDiv'>
-		Finaly, we can repeat our game <i><b>n</b></i> times, and save/observe the results.<br /> 
-		The more we play, the more our cumulated results look like our binomial curve		
+		We can play our game <i><b>n</b></i> times, and save/observe the results.<br /> 
+		The more we play, the more our cumulated results 'fit' our binomial curve.
 	</div>
 
 	<br />
@@ -14,17 +14,20 @@
 
 		<div class='row'>
 		
-			<div class='col-xs-8'>
+			<div class='col-xs-7'>
 				<label>Dice game rule (p)</label>
-				<select class='form-control'>
-					<option value='0.5'>Odd number win (p=0.5)</option>
+				<select class='form-control' id='gamerules'>
+					<option value='3/6'>Odd number win</option>
+					<option value='2/6'>1 and 2 win</option>
 					<option value='1/6'>Number 6 win</option>
-					<option value='0.5'>Number over 3 win</option>
+					<option value='5/6'>Over 1 win</option>
+					<option value='4/6'>Over 2 win</option>
+					<option value='3/6'>Over 3 win</option>
 				</select>		
 			</div>
 
 	
-			<div class="col-xs-4">
+			<div class="col-xs-5">
 				<label>Throws (n)</label>
 				<div class='form-group'>
 				<input type="text" class="form-control" id="throws" value="20">
@@ -59,11 +62,9 @@
 
 <script src='d3game.js'></script>
 <script>
-//var step=0;
 var jstat=[];
 var bigdata=[];//lol
 var gamedata=[];
-
 
 function digest(){//convert bigdata into jstat (d3 data)
 	//console.log('digest()');
@@ -75,39 +76,37 @@ function digest(){//convert bigdata into jstat (d3 data)
 	
 	//scale
 	jstat=[];
-	for(var i=0; i<stats.length;i++){		
-		jstat.push({'i':i,'n':stats[i]/bigdata.length});//to json
+	for(var i=0; i<stats.length;i++){
+		var n=0;
+		if(bigdata.length)n=stats[i]/bigdata.length;
+		jstat.push({'i':i,'n':n});//to json
 	}
 }
 
-function game(){//run one game
-	
-	gamedata=[];
-	
-	var won=0;
-	var n=$('#throws').val()*1;
 
+function game(){//run one game
+	gamedata=[];
+	var w=0;
+	var n=$('#throws').val()*1;
 	for(var i=0;i<n;i++)
 	{
 		var win=false;
 		var d=dice();
-		if(d>3){
+		if(won($('#gamerules').prop("selectedIndex"),d)){
 			win=true;
-			won++;
+			w++;
 		}
-		var t={'d':d,'win':win};
-		gamedata.push(t);
+		gamedata.push({'d':d,'win':win});
 	}
-	return won;
+	return w;
 	//console.log(gamedata);
 }
 
 
 function showGameDetails(){
-	//$("#results").html("showGameDetails()");
+	
 	var htm=[];
 	var won=0;
-	//htm.push("<h3>Game #"+(bigdata.length)+"</h3>");
 	htm.push("<table class='table table-striped'>");
 	htm.push("<thead><th>Throw #</th><th>Dice</th><th>Win</th></thead>");
 	htm.push("<tbody>");
@@ -132,12 +131,11 @@ function showGameDetails(){
 }
 
 function playOnce(){
-	//console.log('step');
+	
 	bigdata.push(game());
 	showGameDetails();
 	digest();
 	updateGame();
-	//step++;
 }
 
 function playAll(){
@@ -181,19 +179,21 @@ $(function(){
 	});
 
 	$('#btn-ffwd').click(function(){
-		//console.log('ffwd');
-		for(var i=0;i<100;i++){
-			bigdata.push(game());
-			//step++;
-		}
+		for(var i=0;i<100;i++)bigdata.push(game());
 		digest();
 		updateGame();
 		showGameDetails();
 	});
 
-	$('#btn-pause').hide();
-	
-	updateGame();
+	$('#gamerules').change(function(){
+		console.log('#gamerules.change');
+		jstat=[];
+		bigdata=[];
+		gamedata=[];
+	});
 
+	$('#btn-pause').hide();
+	digest();
+	updateGame();
 });
 </script>

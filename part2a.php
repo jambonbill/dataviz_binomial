@@ -1,7 +1,8 @@
 
-<h2>Understanding <i>p</i></h2>
 
-<div class="row">
+<div class="row" id='part2a'>
+	
+	<h2>Understanding <i>p</i><a href='#part1' class='pull-right' onclick=$('#part2a').slideUp()><i class='fa fa-times '></i></a></h2>
 
 	<div class="col-sm-6">
 		<div class="ui-widget ui-corner-all" id='sliderDiv'>
@@ -65,11 +66,10 @@
 		</div>
 
 	</div>
+	
+	<hr />
 
 </div>
-
-
-<hr />
 
 <script>
 
@@ -78,7 +78,7 @@ function testdice(){
 	var d=dice();
 
 	var str=d+" : ";
-	if(won(d)){
+	if(won($('#rules').prop("selectedIndex"),d)){
 		str+="You win";
 	}else{
 		str+="You lose";
@@ -93,40 +93,25 @@ function testdice(){
 	
 }
 
-function won(d)
+function won(rule,d)
 {
-	var id=$('#rules').prop("selectedIndex")*1;
+	//var id=$('#rules').prop("selectedIndex")*1;
+	var id=rule*1;
 	
 	switch(id){
 		
-		case 0://odd numbers
-			if(d==1||d==3||d==5)return true;
-			break;
-
-		case 1://1 and 2
-			if(d==1||d==2)return true;
-			break;
+		case 0: if(d==1||d==3||d==5)return true;break;//odd numbers win
+			
+		case 1: if(d==1||d==2)return true;break;//1 and 2 win
 		
-		case 2://6
-			if(d==6)return true;
-			break;
+		case 2: if(d==6)return true;break;//6
 		
-		case 3:// > 1
-			if(d>1)return true;
-			break;
+		case 3: if(d>1)return true; break;// > 1
 		
-		case 4:// > 2
-			if(d>2)return true;
-			break;
+		case 4: if(d>2)return true; break;// > 2
 
-		case 5:// > 3
-			if(d>3)return true;
-			break;
+		case 5: if(d>3)return true; break;// > 3
 
-
-
-		default:
-			return false;
 	}
 	return false;
 }

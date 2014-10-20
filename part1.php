@@ -1,7 +1,8 @@
 
-<h2>Part 1 - Compare two binomials</h2>
 
-<div class="row">
+<div class="row" id='part1'>
+	
+	<h2>Part 1 - Compare two binomials</h2>
 	
 	<div class="col-sm-4" id='sliders'>
 
@@ -18,12 +19,12 @@
 
 		<div id="sliderDiv" class="ui-widget ui-corner-all">
 		<i class="fa fa-magic" style='color:#c00'></i>
-		<label id='labelp1'>p</label> <i class="fa fa-question pull-right" title='Probability'></i> 
+		<label id='labelp1'>p</label> <a href='#part2a' onclick=toggleN() title='Understanding p'><i class="fa fa-question-circle pull-right"></i></a>
 		<div id="p1"></div> 
 
 		<br />
 		<i class="fa fa-arrows-h" style='color:#c00'></i>
-		<label id='labeln1'>n</label>  <i class="fa fa-question pull-right" title='Iterations'></i>
+		<label id='labeln1'>n</label>  <a href='#part2b' onclick=toggleK() title='Understanding p'><i class="fa fa-question-circle pull-right"></i></a>
 		<div id="n1"></div>
 		</div>
 
@@ -39,12 +40,12 @@
 
 		<div id="sliderDiv" class="ui-widget ui-corner-all">
 		<i class="fa fa-magic" style='color:#999'></i>
-		<label id='labelp2'>p</label> <i class="fa fa-question-circle pull-right"></i>
+		<label id='labelp2'>p</label> <a href='#part2a' title='Understanding p'><i class="fa fa-question-circle pull-right"></i></a>
 		<div id="p2"></div>
 
 		<br />
 		<i class="fa fa-arrows-h" style='color:#999'></i>
-		<label id='labeln2'>n</label> <i class="fa fa-question-circle pull-right"></i>
+		<label id='labeln2'>n</label><a href='#part2b' title='Understanding n'><i class="fa fa-question-circle pull-right"></i></a>
 		<div id="n2"></div>
 		</div>
 
@@ -60,8 +61,48 @@
 
 
 <script>
+function updateLabels(){
+	$('#labelp1').html('p : '+$("#p1").slider("value"));
+	$('#labelp2').html('p : '+$("#p2").slider("value"));
+	$('#labeln1').html('n : '+$("#n1").slider("value"));
+	$('#labeln2').html('n : '+$("#n2").slider("value"));	
+}
+
+function debug(){
+	console.clear();
+	for(var i=0;i<data.length;i++){
+		console.log(i, Math.round(data[i].p1*100)/100);
+	}
+}
+
+function toggleN(){
+	if($("#part2a").is(":hidden")){
+    	$("#part2a").slideDown();
+  	}else{
+    	$("#part2a").slideUp();
+  	}
+}
+
+function toggleK(){
+	if($("#part2b").is(":hidden")){
+    	$("#part2b").slideDown();
+  	}else{
+    	$("#part2b").slideUp();
+  	}
+}
+
 $(function() {
-  
+
+	$('#btnn').click(function(){
+		toggleN();
+	});
+
+	$('#btnk').click(function(){
+		toggleK();
+	});
+
+	$("#part2a, #part2b").hide();
+
 	// slider p (0-1)
 	$( "#p1, #p2" ).slider({
 		min:0.01,
@@ -73,8 +114,6 @@ $(function() {
 		animate: true,
 		slide:function(){updateLabels()},
 		change:function(x){
-		  	//var value = $( "#p1" ).slider( "option", "value" );
-		  	//console.log($("#p1").slider("value"));
 			updateLabels();
 			refresh();//compute and redraw graph
 		}
@@ -91,48 +130,22 @@ $(function() {
 		animate: true,
 		slide:function(){updateLabels()},
 		change:function(x){
-			//var value = $( "#n1" ).slider( "option", "value" );
-			//console.log(value);
-			//console.log($(this).val());
 		 	updateLabels();
 		 	refresh();//compute and redraw graph
 		}
 	});
 
 	$("input[name='rad']").change(function(){
-		//console.log($("input[name='rad']:checked").val(),$("input[name='rad2']:checked").val());
 		svg.selectAll('.bar1,.c1').remove();
 		update();//update graph without recomputing
 	});
 
 	$("input[name='rad2']").change(function(){
-		//console.log($("input[name='rad']:checked").val(),$("input[name='rad2']:checked").val());
 		svg.selectAll('.bar2,.c2').remove();
 		update();//update graph without recomputing
 	});
 
-
-	//updateLabels();
 	refresh();//compute and redraw graph
-});
-
-function updateLabels(){
-	$('#labelp1').html('p : '+$("#p1").slider("value"));
-	$('#labelp2').html('p : '+$("#p2").slider("value"));
-	$('#labeln1').html('n : '+$("#n1").slider("value"));
-	$('#labeln2').html('n : '+$("#n2").slider("value"));	
-}
-
-function debug(){
-	console.clear();
-	for(var i=0;i<data.length;i++){
-		console.log(i, Math.round(data[i].p1*100)/100);
-	}
-}
-
-
-$(function(){
-
 	updateLabels();
 
 	$(function() {

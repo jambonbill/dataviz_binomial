@@ -1,8 +1,8 @@
 
-<h2>Understanding <i>k</i></h2>
-
-<div class="row">
-
+<div class="row" id='part2b'>
+	
+	<h2>Understanding <i>k</i><a href='#part1' class='pull-right' onclick=$('#part2b').slideUp()><i class='fa fa-times'></i></a></h2>
+	
 	<div class="col-sm-6">
 		<div class="ui-widget ui-corner-all" id='sliderDiv'>
 		Now we are going to throw our dice, <i><b>n</b></i> times.<br /> 
@@ -17,7 +17,7 @@
 				<div class='row'>
 					<!--Rule selection-->
 					<div class="col-xs-6">
-					<label>Number of throws (n)</label>
+					<label>Num. of throws (n)</label>
 					<div class='form-group'>
 					<select class='form-control' id='selectN'>
 						<option>10</option>
@@ -45,11 +45,13 @@
 	<div class="col-sm-6">
 		<div id='ndemo'>ndemo</div>
 	</div>
+	
+	<hr />
 
 </div>
 
 
-<hr />
+
 
 <script>
 var nseq=[];
@@ -91,7 +93,7 @@ function disp(){
 	for(var i=0;i<nseq.length;i++){
 		htm.push("<tr><td>"+(i+1));
 		htm.push("<td>"+nseq[i]);
-		if(won(nseq[i])){
+		if(won($('#rules').prop("selectedIndex"),nseq[i])){
 			totwin++;
 			var ico="<i class='fa fa-check'></i>";
 		} else{
