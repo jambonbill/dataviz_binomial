@@ -40,12 +40,12 @@
 
 		<div id="sliderDiv" class="ui-widget ui-corner-all">
 		<i class="fa fa-magic" style='color:#999'></i>
-		<label id='labelp2'>p</label> <a href='#part2a' title='Understanding p'><i class="fa fa-question-circle pull-right"></i></a>
+		<label id='labelp2'>p</label> <a href='#part2a' onclick=toggleN() title='Understanding p'><i class="fa fa-question-circle pull-right"></i></a>
 		<div id="p2"></div>
 
 		<br />
 		<i class="fa fa-arrows-h" style='color:#999'></i>
-		<label id='labeln2'>n</label><a href='#part2b' title='Understanding n'><i class="fa fa-question-circle pull-right"></i></a>
+		<label id='labeln2'>n</label><a href='#part2b' onclick=toggleK() title='Understanding n'><i class="fa fa-question-circle pull-right"></i></a>
 		<div id="n2"></div>
 		</div>
 
