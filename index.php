@@ -25,7 +25,7 @@
 
 <div class='container'>
 
-<h1>Binomial distribution demonstration <small>in 800 pixel</small></h1>
+<h1>Binomial distribution demonstration <small></small></h1>
 <hr />
 
 <?php

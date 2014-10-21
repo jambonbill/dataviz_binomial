@@ -2,7 +2,7 @@
 
 <div class="row" id='part1'>
 	
-	<h2>Part 1 - Compare two binomials</h2>
+	<h2>Compare two binomials</h2>
 	
 	<div class="col-sm-4" id='sliders'>
 
