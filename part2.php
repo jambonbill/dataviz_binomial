@@ -5,7 +5,9 @@
 	
 	<h3>
 		<i class='fa fa-info-circle'></i> Understanding <i>p</i>
+		<!--
 		<a href='#part1' class='btn btn-default pull-right' onclick=$('#part2a,#part2b').slideUp() title='Ok, understood'><i class='fa fa-times' style='color:#C00'></i></a>
+		-->
 	</h3>
 
 	<div class="col-sm-6">
