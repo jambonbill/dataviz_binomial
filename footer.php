@@ -4,9 +4,16 @@
 
   <div class="container">
 
-    <p>Designed and built with all the love in the world by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.</p>
-    <p>Maintained by the <a href="https://github.com/twbs?tab=members">core team</a> with the help of <a href="https://github.com/twbs/bootstrap/graphs/contributors">our contributors</a>.</p>
-    <p>Code licensed under <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+    <p><a href=#>fbmx.net</a> submission for the <a href='http://databits.io/challenges' target=_blank>HarvardX Interactive Learning Challenge</a></p>
     
+    <p>More readings about binomial distribution:</p>
+    
+    <ul>
+
+    <li><a href=#>http://en.wikipedia.org/wiki/Binomial_distribution</a>
+    <li><a href=#>http://www.math.uah.edu/stat/applets/DiceExperiment.html</a>
+    <li><a href=#>http://www.math.uah.edu/stat/applets/BinomialCoinExperiment.html</a>
+  </ul>
+
   </div>
 </footer>
