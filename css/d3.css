@@ -27,8 +27,9 @@ svg{
 }
 
 
+/* tooltips */
 div.white{background-color: #fff;}
-div.tooltip {
+div.tooltips {
   position: absolute;
   color:#fff;
   width:150px;
@@ -39,3 +40,10 @@ div.tooltip {
   border-radius: 4px;
   pointer-events: none;
 }
+
+/* sliders */
+#sliderDiv {background-color:#f9f9f9;border:solid 1px #ddd;padding:20px;}
+#slider{float:right;width:90%;}
+
+/* game tables */
+table td { padding:0px !important; }

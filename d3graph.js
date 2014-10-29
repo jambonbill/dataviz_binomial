@@ -1,5 +1,7 @@
 
-// binomial distribution mockup
+// binomial distribution presentation
+// part 1
+
 var color=d3.scale.category20c();
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -82,6 +84,13 @@ function update() {
         .attr("class", "y axis")
         .call(yAxis)
     .append("text")
+        .attr("x", 360)
+        .attr("y", 200)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("k")
+    
+    .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
         .attr("dy", ".71em")
@@ -91,6 +100,12 @@ function update() {
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis2)
+    .append("text")
+        .attr("x", 360)
+        .attr("y", 400)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("k")
     .append("text")
         .attr("x", -240)
         .attr("transform", "rotate(-90)")
@@ -103,7 +118,7 @@ function update() {
     var b1= svg.selectAll(".bar1").data(data);
 
     
-    if ($("input[name='rad']:checked").val()=="bubble") {
+    if ($("input[name='rad1']:checked").val()=="bubble") {
         //bubble
         b1.enter().append("circle")
             .attr("class", "bar1")
@@ -193,7 +208,7 @@ function update() {
     // cumul 1
     var c1= svg.selectAll(".c1").data(data);
 
-    if ($("input[name='rad']:checked").val()=="bubble") {
+    if ($("input[name='rad1']:checked").val()=="bubble") {
     
         c1.enter().append("circle")
             .attr("class", "c1")
@@ -282,7 +297,7 @@ function update() {
  * Tooltip
  */
 var ttdiv = d3.select("body").append("div")
-.attr("class", "tooltip")
+.attr("class", "tooltips")
 .style("opacity", 1e-6);
 
 function mouseover(){
@@ -308,10 +323,8 @@ function mm2(d,i){
     var html = "";
     html+="<b>k = "+i+"</b><br />\n";
     html+="<hr style='margin-top:4px;margin-bottom:4px' i/>";
-    html+="B1 Cummul. ="+Math.round(d.c1*100)/100+"<br />";
-    //html+="p1="+Math.round(d.p1*100)/100+"<br />";
-    html+="B2 Cummul. ="+Math.round(d.c2*100)/100+"<br />";
-    //html+="p2="+Math.round(d.p2*100)/100+"<br />";
+    html+="B1 Cumul. ="+Math.round(d.c1*100)/100+"<br />";
+    html+="B2 Cumul. ="+Math.round(d.c2*100)/100+"<br />";
     ttdiv.html( html )
   .style("left", ttleft )
   .style("top", (d3.event.pageY + 10 ) + "px");
@@ -319,7 +332,7 @@ function mm2(d,i){
 
 
 function ttleft(){
-  var max = $("body").width()-$("div.tooltip").width() - 20;
+  var max = $("body").width()-$("div.tooltips").width() - 20;
     return  Math.min( max , d3.event.pageX + 10 ) + "px";
 }
 
@@ -335,17 +348,10 @@ function mouseout(){
 var data=[];
 function getData(){
     //console.log('getData()');
-    
     var p1=$("#p1").slider("value")*1;
     var p2=$("#p2").slider("value")*1;
     var n1=$('#n1').slider("value")*1;
-    var n2=$('#n2').slider("value")*1;
-    
-    //var p1=0.3;
-    //var n1=20;
-    //var p2=0.7;
-    //var n2=20;
-    
+    var n2=$('#n2').slider("value")*1;   
     data=[];
     for(var k=0;k<=Math.max(n1,n2);k++)
     {
@@ -353,16 +359,12 @@ function getData(){
         var cum1 = BinomialP( p1, n1, k );// cumul
         var prb2 = BinomTerm( p2, n2, k );// proba
         var cum2 = BinomialP( p2, n2, k );// cumul
-        
         data.push({'p1':prb1,'p2':prb2,'c1':cum1,'c2':cum2});//'letter':k,
     }
     return data;
 }
 
-
-
 $(function(){
     //console.log("d3graph.js");
     getData();
 });
-

@@ -1,35 +1,12 @@
-
-<pre>
-<b>Requirements:</b>
-Interactivity. Students should be able to control and "play around" with the visualization, not just look at or watch it.
-Browser compatibility. This bit must work in current-version browsers (IE, Safari, Firefox, Chrome).
-
-
-<b>Recommendations:</b>
-Inspectable data points with accurate values.
-Comparisons with other similar distributions (e.g. Gaussian).
-White or light grey background.
-Width of no more than 800 pixels.
-Mobile compatibility is a plus.
-Accuracy in the distribution and the ability to calculate it for a wide range of values should be balanced against speed of calculation. 
-The binomial distribution involves several factorials, and numbers can become very large or very small quickly. 
-Javascript will not store numbers above about 170 factorial.
-D3 and other packages are generally acceptable. 
-Package size may be a concern for some larger packages - with the global audience of the challenge, download speeds are unreliable.
-
-
-<b>Banned: </b>
-Cookies, local storage, and other client-side data storage.
-</pre>
-
-
 <hr />
 
-<li>http://databits.io/challenges
-<li>http://en.wikipedia.org/wiki/Binomial_distribution
-<li>http://127.0.0.1/d3/barchart/index2.php
-<li>http://www.math.uah.edu/stat/applets/DiceExperiment.html
+<footer class="bs-docs-footer" role="contentinfo">
 
-<li>http://www.math.uah.edu/stat/applets/BinomialCoinExperiment.html
-</body>
-</html>
+  <div class="container">
+
+    <p>Designed and built with all the love in the world by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.</p>
+    <p>Maintained by the <a href="https://github.com/twbs?tab=members">core team</a> with the help of <a href="https://github.com/twbs/bootstrap/graphs/contributors">our contributors</a>.</p>
+    <p>Code licensed under <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+    
+  </div>
+</footer>

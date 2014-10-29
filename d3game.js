@@ -1,5 +1,5 @@
 
-// binomial game
+// part 3 :: binomial game
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 400 - margin.left - margin.right,
     height = 240 - margin.top - margin.bottom;
@@ -49,9 +49,7 @@ function updateGame() {
 
     // delete prev axis
     svgame.selectAll('.axis').remove();
-
-    // x-axis to svg
-    
+  
     svgame.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + 200 + ")")
@@ -60,6 +58,15 @@ function updateGame() {
     svgame.append("g")
         .attr("class", "y axis")
         .call(yA)
+
+    .append("text")
+        //.attr("transform", "rotate(-90)")
+        .attr("x", 360)
+        .attr("y", 200)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("k")
+
     
     .append("text")
         .attr("transform", "rotate(-90)")
@@ -108,32 +115,165 @@ function updateGame() {
         .attr("cy", function(d) { return yg(d.n); })
         .attr("r", function(d,i){return Math.max(2,width/4/jstat.length);});
 
-
-    
     b1.exit().remove(); 
 }
 
 
-//tooltip
+// tooltip
 function mmgame(d,i){
     dod=d;
     var html = "";
     html+="<b>k = "+i+"<br />\n";
     html+="<hr style='margin-top:4px;margin-bottom:4px' i/>";
     html+="Value="+Math.round(d.n*100)/100+"<br />";
-    //html+="p1="+Math.round(d.p1*100)/100+"<br />";
-    //html+="Cummulated value 2="+Math.round(d.c2*100)/100+"<br />";
-    //html+="p2="+Math.round(d.p2*100)/100+"<br />";
     ttdiv.html( html )
-  .style("left", ttleft )
-  .style("top", (d3.event.pageY + 10 ) + "px");
+    .style("left", ttleft )
+    .style("top", (d3.event.pageY + 10 ) + "px");
+}
+
+// game data
+var jstat=[];
+var bigdata=[];//lol
+var gamedata=[];
+
+function digest(){//convert bigdata into jstat (d3 data)
+    //console.log('digest()');
+    var n=$('#throws').val()*1+1;
+    var stats=new Array(n);
+    
+    for(var i=0; i<stats.length;i++)stats[i]=0;//init   
+    for(var i=0; i<bigdata.length;i++)stats[bigdata[i]]++;
+    
+    //scale
+    jstat=[];
+    for(var i=0; i<stats.length;i++){
+        var n=0;
+        if(bigdata.length)n=stats[i]/bigdata.length;
+        jstat.push({'i':i,'n':n});//to json
+    }
 }
 
 
+function game(){//run one game
+    gamedata=[];
+    var w=0;
+    var n=$('#throws').val()*1;
+    if(n>200){//limit
+        n=200;
+        $('#throws').val(n);
+    }
+    
+    for(var i=0;i<n;i++)
+    {
+        var win=false;
+        var d=dice();
+        if(won($('#gamerules').prop("selectedIndex"),d)){
+            win=true;
+            w++;
+        }
+        gamedata.push({'d':d,'win':win});
+    }
+    return w;
+}
 
+
+function showGameDetails(){
+    
+    var htm=[];
+    var won=0;
+    htm.push("<table class='table table-striped'>");
+    htm.push("<thead><th>Throw #</th><th>Dice</th><th>Win</th></thead>");
+    htm.push("<tbody>");
+    for(var i=0;i<gamedata.length;i++){
+        htm.push("<tr>")
+        htm.push("<td>"+(i+1))
+        htm.push("<td>"+gamedata[i].d);
+        htm.push("<td>");
+        if(gamedata[i].win)htm.push("<i class='fa fa-check'></i>");
+        else htm.push("<i class='fa fa-close' style='color:#ccc'></i>");
+        
+        if(gamedata[i].win){
+            won++;
+        }
+    }
+    htm.push("<tbody>");
+    htm.push("<tfoot><th>Game #"+(bigdata.length)+"</th><th>Winning hands (k)</th><th>"+won+"</th></tfoot>");
+    htm.push("</table>");
+    $("#results").html(htm.join(''));
+    $("#btn-pause").html('<i class="fa fa-pause"></i> #'+bigdata.length);
+    $("#btn-play").html('<i class="fa fa-play"></i> #'+bigdata.length);
+}
+
+function playOnce(){
+   
+     bigdata.push(game());
+    showGameDetails();
+    digest();
+    updateGame();
+}
+
+function playAll(){
+    if(bigdata.length>9999){
+        return false;
+    }
+    playOnce();
+    t=setTimeout(function(){
+        playAll();
+    }, 100);
+}
+
+function rewind(){
+    clearTimeout(t);
+    jstat=[];
+    bigdata=[];//
+    gamedata=[];
+    showGameDetails();
+    digest();
+    updateGame();
+}
 
 $(function(){
-    console.log("d3game.js");
-    updateGame();
-});
+    //console.log("d3game.js");
+    
+    $('#btn-stop').click(function(){ 
+        $('#btn-play').show();
+        $('#btn-pause').hide();
+        rewind();
+    });
+    
+    $('#btn-step').click(function(){
+        $('#btn-play').show();
+        $('#btn-pause').hide();
+        clearTimeout(t);
+        playOnce();
+    });
 
+    $('#btn-play').click(function(){
+        $('#btn-play').hide();
+        $('#btn-pause').show();
+        playAll();
+    });
+    
+    $('#btn-pause').click(function(){
+        $('#btn-play').show();
+        $('#btn-pause').hide();
+        clearTimeout(t);
+    });
+
+    $('#btn-ffwd').click(function(){
+        for(var i=0;i<100;i++)bigdata.push(game());
+        digest();
+        updateGame();
+        showGameDetails();
+    });
+
+    $('#gamerules').change(function(){
+        console.log('#gamerules.change');
+        rewind();
+    });
+
+    $('#btn-pause').hide();
+    $('.btn-default').tooltip();  
+
+    rewind();
+});

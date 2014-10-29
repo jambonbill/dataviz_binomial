@@ -1,9 +1,8 @@
-
-
+// binomial calulation functions
+/*
 function Fixed( s, wid, dec ) {
     //console.log('Fixed()');
    // many combinations of possibilities
-
    // maybe prepare for upcoming truncate
    var z = 1
    if (dec > 0) {
@@ -76,6 +75,7 @@ function Fixed( s, wid, dec ) {
 
     return s;
 }
+*/
 
 // Make sure that the value is in the range [0-1]
 function Prb( x ) {
@@ -243,7 +243,7 @@ function BinomialPF( p, n, k ) {//if (n >= 1000)
 
 function BinomTerm( p, n, k ) {
     
-    //console.log('BinomTerm(p, n, k)');
+   // console.log('BinomTerm(p, n, k)');
    // for success probability p and n trials
    //     probability of exactly k successes
    return Math.exp( LnComb(n,k)
@@ -278,63 +278,6 @@ function BinomialP( p, n, k ) {
       }
 }
 
-/*
-function DoBinom( aform ) {
-   
-
-   var p = Prb(parseFloat(aform.p.value));
-   //aform.p.value = Fixed(p,10,4);
-   
-   var n = PosV(parseInt(aform.n.value));
-   //aform.n.value = Fixed(n,8,0);
-   
-   var k = PosV(parseInt(aform.k.value));
-   if (k > n)  k = n;
-   
-   console.log('DoBinom',p,n,k);
-
-
-   //aform.k.value = Fixed(k,8,0);
-   
-   var proba=Fixed(BinomTerm( p, n, k ),8,4);//proba
-   aform.tnk.value = proba;
-   
-   var t = BinomialP( p, n, k );
-
-   var cumul=Fixed(t,8,4);//cumul
-   aform.pnk.value = cumul;
-
-   //console.log("proba="+proba,"cumul="+cumul);
-
-   aform.qnk.value = Fixed(1-t,8,4);
+function dice(){
+  return Math.floor(Math.random() * 6) + 1;
 }
-*/
-
-// A coin
-function Coin(){
-    //Properties
-  
-    this.value = -1; //1 heads, 0 tails, otherwise not tossed
-    this.prob = 0.5;
-  
-    //Methods
-    this.setValue = function(v) {
-        this.value = v;
-    };
-    
-    this.toss = function(){
-        var p = Math.random(), v;
-        if (p <= this.prob) v = 1; else v = 0;
-        this.setValue(v);
-    };
-}
-
-
-function toss(prob){
-    var p = Math.random(), v;
-    if (p <= prob) v = 1; else v = 0;
-    return (p <= prob);
-    // or
-    return v;
-};
-
