@@ -132,8 +132,9 @@ function mmgame(d,i){
 }
 
 // game data
+var t;// timer
 var jstat=[];
-var bigdata=[];//lol
+var bigdata=[];
 var gamedata=[];
 
 function digest(){//convert bigdata into jstat (d3 data)
@@ -158,8 +159,8 @@ function game(){//run one game
     gamedata=[];
     var w=0;
     var n=$('#throws').val()*1;
-    if(n>200){//limit
-        n=200;
+    if(n>100){//limit
+        n=100;
         $('#throws').val(n);
     }
     
@@ -188,8 +189,8 @@ function showGameDetails(){
         htm.push("<tr>")
         htm.push("<td>"+(i+1))
         htm.push("<td>"+gamedata[i].d);
-        htm.push("<td>");
-        if(gamedata[i].win)htm.push("<i class='fa fa-check'></i>");
+        htm.push("<td style='text-align:center'>");
+        if(gamedata[i].win)htm.push("<i class='fa fa-check-circle' style='color:#5cb85c'></i>");
         else htm.push("<i class='fa fa-close' style='color:#ccc'></i>");
         
         if(gamedata[i].win){
@@ -234,7 +235,7 @@ function rewind(){
 
 $(function(){
     //console.log("d3game.js");
-    
+
     $('#btn-stop').click(function(){ 
         $('#btn-play').show();
         $('#btn-pause').hide();
@@ -267,10 +268,10 @@ $(function(){
         showGameDetails();
     });
 
-    $('#gamerules').change(function(){
-        console.log('#gamerules.change');
+    $('#gamerules,#throws').change(function(){
         rewind();
     });
+
 
     $('#btn-pause').hide();
     $('.btn-default').tooltip();  

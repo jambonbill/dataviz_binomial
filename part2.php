@@ -112,7 +112,7 @@
 	</div><!--End of col-->
 
 	<div class="col-sm-6">
-		<div id='ndemo'>ndemo</div>
+		<div id='nktable'></div>
 	</div>
 	
 </div>
@@ -171,11 +171,11 @@ $('#rules').change(function(o){
 
 // part 2 (n and k)
 var nseq=[];
-var t=null;
+var to=null;
 function throwNtimes(){
 	nseq=[];
 	$("#btnThrown").fadeOut(100);
-	clearTimeout(t);
+	clearTimeout(to);
 	addNRepeat();
 }
 
@@ -190,7 +190,7 @@ function addNRepeat(){
 
 	nseq.push(dice());// add 
 	disp();
-	t=setTimeout(function(){//repeat
+	to=setTimeout(function(){//repeat
 		addNRepeat();
 	},100);
 }
@@ -207,27 +207,27 @@ function disp(){
 		htm.push("<td>"+nseq[i]);
 		if(won($('#rules').prop("selectedIndex"),nseq[i])){
 			totwin++;
-			var ico="<i class='fa fa-check'></i>";
+			var ico="<i class='fa fa-check-circle' style='color:#5CB85C'></i>";
 		} else{
 			var ico="<i class='fa fa-times' style='color:#ccc'></i>";
 		}
-		htm.push("<td>"+ico);
+		htm.push("<td style='text-align:center'>"+ico);
 	}
 	htm.push("</tbody>");
 	htm.push("<tfoot><th></th><th>Winning hands (k)</th><th>"+totwin+"</th></tfoot>");
 	htm.push("</table>");
-	$('#ndemo').html(htm.join(''));
+	$('#nktable').html(htm.join(''));
 }
 
 
 $(function(){
 	$('#selectN').change(function(o){
 		nseq=[];
-		clearTimeout(t);
-		$('#ndemo').html('');
+		clearTimeout(to);
+		//$('#nktable').html('');
 		throwNtimes();
 	});
-	//throwNtimes();
+	throwNtimes();
 });
 
 </script>

@@ -1,85 +1,8 @@
 // binomial calulation functions
-/*
-function Fixed( s, wid, dec ) {
-    //console.log('Fixed()');
-   // many combinations of possibilities
-   // maybe prepare for upcoming truncate
-   var z = 1
-   if (dec > 0) {
-      z /= Math.pow( 10, dec );
-      if (s < -z)  s -= 0.5 * z;
-      else
-         if (s > z)  s += 0.5 * z;
-         else
-            s = 0;
-      }
 
-   // assure a string
-   s = "" + s;
-
-   // chop neg, if any
-   var neg = 0;
-   if (s.charAt(0) == "-") {
-      neg = 2;
-      s = s.substring( 1, s.length );
-      }
-
-   // chop exponent, if any
-   var exp = "";
-   var e = s.lastIndexOf( "E" );
-   if (e < 0)  e = s.lastIndexOf( "e" );
-   if (e > -1) {
-      exp = s.substring( e, s.length );
-      s = s.substring( 0, e );
-      }
-
-   // if dec > 0 assure "."; dp == index of "."
-   var dp = s.indexOf( ".", 0 );
-   if (dp == -1) {
-      dp = s.length;
-      if (dec > 0) {
-         s += ".";
-         dp = s.length - 1;
-         }
-      }
-
-   // assure leading digit
-   if (dp == 0) {
-      s = '0' + s;
-      dp = 1;
-      }
-
-   // not enough dec pl?  add 0's
-   while ((dec > 0) && ((s.length - dp - 1) < dec))
-      s += "0";
-
-   // too many dec pl?  take a substring
-   var places = s.length - dp - 1;
-   if (places > dec)
-      if (dec == 0)
-         s = s.substring( 0, dp );
-      else
-         s = s.substring( 0, dp + dec + 1 );
-
-    // recover exponent, if any
-    s += exp;
-
-    // recover neg, if any
-    if (neg > 0)
-        s = "-" + s;
-
-    // if not enough width, add spaces IN FRONT
-    //    too many places?  tough!
-    while (s.length < wid)
-        s = " " + s;
-
-    return s;
-}
-*/
 
 // Make sure that the value is in the range [0-1]
 function Prb( x ) {
-    //console.log('Prb( x )');
     if (x < 0)  x = 0;
     else
       if (x > 1)  x = 1;
@@ -89,7 +12,6 @@ function Prb( x ) {
 
 // return absolute value (Math.abs ?)
 function PosV( x ) {
-    //console.log('PosV( x )');
     if (x < 0)  x = -x;
     return x;
 }
@@ -99,8 +21,7 @@ function PosV( x ) {
 
 // FACTORIALS
 
-function Fact( x ) {// unused
-    //console.log('Fact( '+x+' )');
+function Fact( x ) {
     // x factorial
     var  t=1;
     while (x > 1)
@@ -110,7 +31,7 @@ function Fact( x ) {// unused
 
 
 function LnFact( x ) {
-   //console.log('LnFact( '+x+' )');
+   
    // ln(x!) by Stirling's formula
    //   see Knuth I: 111
    if (x <= 1)  x = 1;
@@ -138,8 +59,6 @@ function LnFact( x ) {
 
 function LnComb( n, k ) {
 
-    //console.log('LnComb( n, k )');
-
     if ((k == 0) || (k == n))  return 0;
     else
       if ((k > n) || (k < 0))  return -1E38;
@@ -151,8 +70,6 @@ function LnComb( n, k ) {
 // NORMAL
 
 function NormalP( x ) {// if (n >= 1000)
-
-    //console.log('NormalP()');
    // Abramowitz & Stegun 26.2.19
    var
       d1 = 0.0498673470,
@@ -179,8 +96,6 @@ function NormalP( x ) {// if (n >= 1000)
 
 function g( x ) {//if (n >= 1000)
    // Peizer & Pratt 1968, JASA 63: 1416-1456
-   
-   //console.log('g( x )');
 
    var  switchlev = 0.1, z;
 
@@ -210,8 +125,6 @@ function g( x ) {//if (n >= 1000)
 
 
 function BinomialPF( p, n, k ) {//if (n >= 1000)
-
-    //Console.log('BinomialPF()');
 
     // by Normal approximation }
     // Peizer & Pratt 1968, JASA 63: 1416-1456
@@ -243,7 +156,6 @@ function BinomialPF( p, n, k ) {//if (n >= 1000)
 
 function BinomTerm( p, n, k ) {
     
-   // console.log('BinomTerm(p, n, k)');
    // for success probability p and n trials
    //     probability of exactly k successes
    return Math.exp( LnComb(n,k)
@@ -253,8 +165,6 @@ function BinomTerm( p, n, k ) {
 
 
 function BinomialP( p, n, k ) {
-    
-    //console.log('BinomialP( p, n, k )');
 
     if (n >= 1000)  return BinomialPF( p, n, k );
     else {
