@@ -1,0 +1,330 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<title>Binomial distribution</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/jquery-ui.css" rel="stylesheet">
+<link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<link href="./css/d3.css" rel="stylesheet">
+<!-- Font awesome -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery-ui.js"></script>
+<script src="./js/bootstrap.js"></script>
+
+<script src="./js/d3.v3.min.js"></script>
+<script src="./js/binomial.js"></script>
+
+</head>
+
+<body>
+
+
+<header class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="container">
+<div class="navbar-header">
+<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<div class="navbar-brand">Binomial distribution demonstration</div>
+</div>
+
+<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+<ul class="nav navbar-nav navbar-right">
+<li><a href="http://www.fbmx.net">fbmx.net</a></li>
+</ul>
+</nav>
+</div>
+</header><div class='container bs-docs-container'>
+
+
+<div class="row" id='part1'>
+<h2><i class='fa fa-exchange'></i> Compare two binomials</h2>
+<div class="col-sm-4" id='sliders'>
+
+<!-- Curve 1 params -->
+<h3>
+Binomial 1
+<div class="btn-group pull-right" data-toggle="buttons">
+<label class="btn btn-default" title='Graph B1 as bars' data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+<input type="radio" name="rad1" value="bar"><i class="fa fa-bar-chart" style='color:#c00'></i>&nbsp;
+</label>
+<label class="btn btn-default active" title='Graph B1 as dots'>
+<input type="radio" name="rad1" value="bubble" checked><i class="fa fa-circle" style='color:#c00'></i>&nbsp;
+</label>
+</div>
+
+</h3>
+
+
+<div id="sliderDiv" class="ui-widget ui-corner-all">
+<i class="fa fa-magic" style='color:#c00'></i>
+<label id='labelp1'>p</label> <a href='#part2a' title='Understanding p, n and k'><i class="fa fa-question-circle pull-right"></i></a>
+<div id="p1"></div>
+
+<br />
+<i class="fa fa-arrows-h" style='color:#c00'></i>
+<label id='labeln1'>n</label>
+<div id="n1"></div>
+</div>
+
+
+<!-- Curve 2 params -->
+<h3>
+Binomial 2
+<div class="btn-group pull-right" data-toggle="buttons">
+<label class="btn btn-default active" title='Graph B2 as bars'>
+<input type="radio" name="rad2" value="bar" checked><i class="fa fa-bar-chart" style='color:#999'></i>&nbsp;
+</label>
+<label class="btn btn-default" title='Graph B2 as dots'>
+<input type="radio" name="rad2" value="bubble"><i class="fa fa-circle" style='color:#999'></i>&nbsp;
+</label>
+</div>
+</h3>
+
+<div id="sliderDiv" class="ui-widget ui-corner-all">
+<i class="fa fa-magic" style='color:#999'></i>
+<label id='labelp2'>p</label>
+<div id="p2"></div>
+
+<br />
+<i class="fa fa-arrows-h" style='color:#999'></i>
+<label id='labeln2'>n</label>
+<div id="n2"></div>
+</div>
+
+
+</div>
+<div class="col-sm-8" id='graph1'>
+<!-- D3 Graph -->
+</div>
+
+</div>
+
+<div class="alert alert-warning fade in" role="alert">
+<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+Set the desired values for <i>n</i> (number of events) and <i>p</i> (probability of success on a single event) using the sliders
+</div>
+
+<hr />
+
+
+<script>
+
+</script>
+
+<script src='js/d3graph.js'></script>
+<!-- Understanding p -->
+
+<div class="row" id='part2a'>
+<h3>
+<i class='fa fa-info-circle'></i> Understanding <i>p</i>
+<!--
+<a href='#part1' class='btn btn-default pull-right' onclick=$('#part2a,#part2b').slideUp() title='Ok, understood'><i class='fa fa-times' style='color:#C00'></i></a>
+-->
+</h3>
+
+<div class="col-sm-6">
+<div class="ui-widget ui-corner-all" id='sliderDiv'>
+Let's play dice: <br />
+Pick a dice game rule in the list on the right, and throw the dice.<br />
+You win the game with probability <i><b>p</b></i>, according to the selected rule.<br />
+Each rule has a different success probability, denoted as <i><b>p</b></i>
+</div>
+</div>
+
+<div class="col-sm-6">
+<div class="ui-widget ui-corner-all" id='sliderDiv'>
+<div class='form-group'>
+<div class='row'>
+<!--Rule selection-->
+<div class="col-xs-6">
+<label>Dice game rule</label>
+<div class='form-group'>
+<select class='form-control' id='rules'>
+<option value='3/6'>Odd number wins</option>
+<option value='2/6'>1 and 2 wins</option>
+<option value='1/6'>Number 6 win</option>
+<option value='5/6'>Over 1 wins</option>
+<option value='4/6'>Over 2 wins</option>
+<option value='3/6'>Over 3 wins</option>
+</select>
+</div>
+</div>
+
+<div class="col-xs-6">
+<label>Probability</label>
+<div id='rule_details'><i>p=3/6</i></div>
+</div>
+</div>
+
+<div class='row'>
+<div class="col-xs-6">
+<label>Test game</label>
+<div class='form-group'>
+<a href='#testgame' id='testbtn' class='btn btn-default' onclick='testdice()' title='Throw dice to test probability'><i class='fa fa-play'></i> throw dice</a>
+&nbsp;
+</div>
+</div>
+
+<div class="col-xs-6">
+<label>Result</label>
+<div class="form-group" id='testresult'><i>(throw dice)</i></div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Understanding p -->
+<div class="row" id='part2b'>
+<h3><i class='fa fa-info-circle'></i> Understanding <i>n</i> and <i>k</i></h3>
+<!--<a href='#part1' class='pull-right' onclick=$('#part2b').slideUp()><i class='fa fa-times'></i></a>-->
+<div class="col-sm-6">
+<div class="ui-widget ui-corner-all" id='sliderDiv'>
+Now we are going to throw the dice <i><b>n</b></i> times.<br />
+Enter the number of dice throws you want to play, and run the game.<br />
+The number of winning hands is <i><b>k</b></i>
+</div>
+
+<br />
+<div class="ui-widget ui-corner-all" id='sliderDiv'>
+<div class='row'>
+<!--Rule selection-->
+<div class="col-xs-6">
+<label>Num. of throws (n)</label>
+<div class='form-group'>
+<select class='form-control' id='selectN'>
+<option>10</option>
+<option>11</option>
+<option>12</option>
+<option>13</option>
+<option>14</option>
+<option>15</option>
+<option>16</option>
+<option>17</option>
+<option>18</option>
+<option>19</option>
+<option>20</option>
+</select>
+</div>
+</div>
+
+<div class="col-xs-6">
+<label>Test k</label>
+<div class='form-group'>
+<a href=#test id='btnThrown' onclick=throwNtimes() class='btn btn-default' title='Play the game and observe the results'><i class='fa fa-play'></i> Throw n times</a>
+</div>
+</div>
+</div>
+</div>
+</div><!--End of col-->
+
+<div class="col-sm-6">
+<div id='nktable'></div>
+</div>
+</div>
+
+<hr />
+
+<script src="js/part2.js"></script><div class="row" id='part2c'>
+
+<h2><i class='fa fa-play-circle-o'></i> Play the game</h2>
+
+<div class="col-sm-5" id='whereami'>
+<div class="ui-widget ui-corner-all" id='sliderDiv'>
+We can repeat the game many times, each time saving <i>k</i>.<br />
+The more we play, the more the distribution of k resembles the Binomial(n, p).
+</div>
+
+<br />
+
+<div class="ui-widget ui-corner-all" id='sliderDiv'>
+
+<div class='row'>
+<div class='col-xs-7'>
+<label>Game rule (p)</label>
+<select class='form-control' id='gamerules'>
+<option value='3/6'>Odd number win</option>
+<option value='2/6'>1 and 2 win</option>
+<option value='1/6'>Number 6 win</option>
+<option value='5/6'>Over 1 win</option>
+<option value='4/6'>Over 2 win</option>
+<option value='3/6'>Over 3 win</option>
+</select>
+</div>
+
+<div class="col-xs-5">
+<label>Throws (n)</label>
+<div class='form-group'>
+<input type="text" class="form-control" id="throws" value="20">
+</div>
+</div>
+
+</div>
+
+
+<div class='row'><!--game controls-->
+<div class="col-xs-12">
+
+<div class="btn-group">
+<button id='btn-stop' class='btn btn-default' title='Restart from 0'><i class='fa fa-fast-backward'></i>&nbsp;</button>
+<button id='btn-step' class='btn btn-default' title='Play one game'><i class='fa fa-step-forward'></i>&nbsp;</button>
+<button id='btn-play' class='btn btn-default' title='Play many games'><i class='fa fa-play'></i> Play </button>
+<button id='btn-pause' class='btn btn-default' title='Pause'><i class='fa fa-pause'></i> Pause </button>
+<button id='btn-ffwd' class='btn btn-default' title='Play 100 games at once'><i class='fa fa-fast-forward'></i>&nbsp;</button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<div class="col-sm-7">
+<div id="graph2"></div>
+<div id='results'></div>
+</div>
+
+</div>
+
+<br />
+
+<div class="row">
+<div class="alert alert-warning fade in" role="alert">
+<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+Hit the Fast Forward button <i class='fa fa-fast-forward'></i> and play 100 games at once
+</div>
+</div>
+
+
+<script src='js/d3game.js'></script>
+</div><hr />
+
+<footer class="bs-docs-footer" role="contentinfo">
+
+<div class="container">
+
+<p><a href=#>fbmx.net</a> submission for the <a href='http://databits.io/challenges' target=_blank>HarvardX Interactive Learning Challenge</a></p>
+<p>More readings: <a href='http://en.wikipedia.org/wiki/Binomial_distribution' target=_blank>http://en.wikipedia.org/wiki/Binomial_distribution</a></p>
+
+</div>
+</footer>
+<br />
+<br />
+<br />
+<br />
+
+</body>
+</html>
