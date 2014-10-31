@@ -32,8 +32,6 @@ header('Content-Type: text/html; charset=utf-8');
 include "header.php";
 echo "<div class='container bs-docs-container'>";
 
-//include "part0.php";// description
-//include "part00.php";// description
 include "part1.php";
 include "part2.php";// n,p,k definitions
 include "part3.php";// game
@@ -50,8 +48,3 @@ include "footer.php";//
 
 </body>
 </html>
-
- <script> 
- // tooltip demo 
- //$('.btn').tooltip();
- </script>

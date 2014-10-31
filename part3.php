@@ -5,8 +5,9 @@
 	<div class="col-sm-5" id='whereami'>
 		
 		<div class="ui-widget ui-corner-all" id='sliderDiv'>
-			We can play our game <i><b>n</b></i> times, and save/observe the results.<br /> 
-			The more we play, the more our cumulated results 'fit' our binomial curve.
+			We can repeat the game many times, each time saving <i>k</i>.<br /> 
+			
+			The more we play, the more the distribution of k resembles the Binomial(n, p).
 		</div>
 
 		<br />
@@ -73,4 +74,4 @@
 </div>
 
 
-<script src='d3game.js'></script>
+<script src='js/d3game.js'></script>
