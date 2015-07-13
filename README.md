@@ -2,40 +2,37 @@ This page is about Binomial distributions and comprises four sections:
 
 
 
-1. Comparing two binomials
+# Comparing two binomials
 ------------------------------
-	a.      Set the desired values for n (number of events) and p (probability of success on a single event) using the sliders
-	b.      See the distribution of k (number of successes) for each of the rules in the first graph, as well as the cumulated probability in the second graph, and for each of the rules.
-	c.      Tooltips give precise values
-	d.      You can also set your display to bubbles or bars.
+ * Set the desired values for n (number of events) and p (probability of success on a single event) using the sliders
+ * See the distribution of k (number of successes) for each of the rules in the first graph, as well as the cumulated probability in the second graph, and for each of the rules.
+ * Tooltips give precise values
+ * You can also set your display to bubbles or bars.
 
 
 
 
-2.      Understanding p
+# Understanding p
 ------------------------------
-	a.      Hit the question mark on any of the p lines
-	b.      Pick a rule from the menu to define success and see associated probability (for example, 6 wins has a probability of 1/6 – we’re assuming here the dice are not loaded.
-	c.      Throw the dice as many times as you like
+ * Hit the question mark on any of the p lines
+ * Pick a rule from the menu to define success and see associated probability (for example, 6 wins has a probability of 1/6 – we’re assuming here the dice are not loaded.
+ * Throw the dice as many times as you like
 
 
 
 
-3.      Understanding n and k
+# Understanding n and k
 -------------------------------
-	a.      Hit any of the question marks on the n lines
-	b.      Using the same probability, the dice is now cast n times. K is the number of wins (successes) that are recorded.
-	c.      Again, play as many games as you like and see how k varies
+ * Hit any of the question marks on the n lines
+ * Using the same probability, the dice is now cast n times. K is the number of wins (successes) that are recorded.
+ * Again, play as many games as you like and see how k varies
 
-
-
-
-4.      Playing the game again and again
+# Playing the game again and again
 ----------------------------------------
-	a.      Like in the previous section, we’re throwing the dice again and again.
-	b.      n throws make game 1, with a number of successes equal to k(1)
-	c.      another n throws make game 2, with a number of successes equal to k(2)
-	d.      and so on…
-	e.      The graph shows how the k(i) are distributed, compared to the distribution.
-	f.       Hit the Fast Forward button and play 100 games at once
-	g.      See how, gradually, our winning hands average out to the Binomial distribution.
+ * Like in the previous section, we’re throwing the dice again and again.
+ * n throws make game 1, with a number of successes equal to k(1)
+ * another n throws make game 2, with a number of successes equal to k(2)
+ * and so on…
+ * The graph shows how the k(i) are distributed, compared to the distribution.
+ * Hit the Fast Forward button and play 100 games at once
+ * See how, gradually, our winning hands average out to the Binomial distribution.
